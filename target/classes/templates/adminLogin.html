@@ -1,0 +1,134 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+   <title>Login Administrador</title>
+   <style>
+       /* Fondo ajustado */
+       body {
+           font-family: 'Arial', sans-serif;
+           background: url('			https://miamialmundo.com/wp-content/uploads/2022/12/Mall_of_the_Emirates_3679338750.jpg') no-repeat center center fixed;
+           background-size: cover; /* Asegura que la imagen cubra toda la página */
+           min-height: 100vh;
+           margin: 0;
+           display: flex;
+           flex-direction: column;
+           justify-content: center;
+           align-items: center;
+           overflow: hidden;
+           position: relative;
+           color: #fff;
+           padding-bottom: 50px; /* Espacio adicional en la parte inferior */
+       }
+
+       /* Borde visible en toda la página */
+       body::before {
+           content: '';
+           position: absolute;
+           top: 0;
+           left: 0;
+           right: 0;
+           bottom: 0;
+           z-index: -1;
+           border: 6px solid;
+           border-image: linear-gradient(45deg, #00bfff, #ff1493, #ff6347, #ffd700); /* Gradiente de bordes */
+           border-image-slice: 1;
+       }
+
+       /* Título */
+       h2 {
+           text-align: center;
+           color: #fff;
+           font-size: 2.8em;
+           margin-top: 100px;
+           text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+       }
+
+       /* Formulario ajustado a los campos */
+       form {
+           background-color: rgba(0, 0, 0, 0.7); /* Fondo más oscuro para un mejor contraste */
+           padding: 30px; /* Más espacio dentro del formulario */
+           border-radius: 15px;
+           width: 350px; /* Ancho ajustado */
+           box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+           color: #fff;
+           border: 3px solid rgba(255, 255, 255, 0.7); /* Borde blanco del formulario */
+           display: flex;
+           flex-direction: column;
+           justify-content: space-between;
+       }
+
+       label {
+           font-size: 1.2em;
+           color: #ddd;
+           margin-top: 15px;
+       }
+
+       input {
+           width: 100%;
+           padding: 12px;
+           margin-top: 8px;
+           border: 1px solid #ddd;
+           border-radius: 5px;
+           font-size: 1em;
+           color: #555;
+           box-sizing: border-box; /* Asegura que el padding no afecte el tamaño del campo */
+       }
+
+       input:focus {
+           border-color: #ff6347; /* Resalta el borde al enfocar el campo */
+           outline: none;
+       }
+
+       button {
+           width: 100%;
+           padding: 12px;
+           background-color: #ff6347; /* Color de fondo naranja */
+           color: #fff;
+           border: none;
+           border-radius: 5px;
+           font-size: 1.1em;
+           cursor: pointer;
+           margin-top: 20px;
+           transition: background-color 0.3s, transform 0.2s ease-in-out;
+       }
+
+       button:hover {
+           background-color: #4682b4; /* Azul en hover */
+           transform: scale(1.05);
+           box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+       }
+
+       p {
+           text-align: center;
+           color: #e74c3c;
+           margin-top: 20px;
+       }
+
+       /* Responsive */
+       @media (max-width: 500px) {
+           h2 {
+               font-size: 2.2em; /* Ajusta el tamaño del título en pantallas pequeñas */
+           }
+
+           form {
+               width: 90%;
+               padding: 20px;
+           }
+       }
+   </style>
+</head>
+<body>
+   <h2>Iniciar Sesión como Administrador</h2>
+   <form action="/admin-login" method="post">
+       <label for="usuario">Usuario:</label>
+       <input type="text" id="usuario" name="usuario" required>
+       <br>
+       <label for="contraseña">Contraseña:</label>
+       <input type="password" id="contraseña" name="contraseña" required>
+       <br>
+       <button type="submit">Iniciar Sesión</button>
+   </form>
+   <p th:text="${error}"></p>
+</body>
+</html>

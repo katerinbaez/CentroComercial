@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Cliente</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: url('			https://d100mj7v0l85u5.cloudfront.net/s3fs-public/2023-02/centro-comercial-mas-grande-de-colombia.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 8px solid transparent;
+            border-image: linear-gradient(45deg, #00bfff, #ff1493, #ff6347, #ffd700);
+            border-image-slice: 1;
+            pointer-events: none;
+        }
+
+        .container {
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: left;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-align: center;
+            text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.6);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1.1em;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        button {
+            padding: 12px 20px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        button[type="submit"] {
+            background-color: #32cd32;
+            color: #fff;
+        }
+
+        button[type="submit"]:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(50, 205, 50, 0.7);
+        }
+
+        button.cancel {
+            background-color: #ff6347;
+            color: #fff;
+            margin-top: 10px;
+        }
+
+        button.cancel:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 99, 71, 0.7);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Editar Cliente</h1>
+        <form th:action="@{/clientes/actualizar/{id}(id=${cliente.id})}" method="post">
+            <!-- Campo oculto para el ID -->
+            <input type="hidden" id="id" name="id" th:value="${cliente.id}">
+
+            <div>
+                <label for="cedula">Cédula:</label>
+                <input type="text" id="cedula" name="cedula" th:value="${cliente.cedula}" required>
+            </div>
+
+            <div>
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" th:value="${cliente.nombre}" required>
+            </div>
+
+            <div>
+                <label for="apellido">Apellido:</label>
+                <input type="text" id="apellido" name="apellido" th:value="${cliente.apellido}" required>
+            </div>
+
+            <div>
+                <label for="usuario">Usuario:</label>
+                <input type="text" id="usuario" name="usuario" th:value="${cliente.usuario}" required>
+            </div>
+
+            <div>
+                <label for="contraseña">Contraseña:</label>
+                <input type="password" id="contraseña" name="contraseña" th:value="${cliente.contraseña}" required>
+            </div>
+
+            <div>
+                <button type="submit">Actualizar</button>
+                <a href="/clientes">
+                    <button type="button" class="cancel">Cancelar</button>
+                </a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

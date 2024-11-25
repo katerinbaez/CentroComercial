@@ -1,0 +1,138 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+   <title>Cliente - Inicio de Sesión</title>
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+   <style>
+       /* Fondo ajustado */
+       body {
+           font-family: 'Poppins', sans-serif;
+           background: url('https://res.cloudinary.com/deunyl3k1/image/upload/s--gHRijqpS--/c_thumb,f_auto,h_1080,q_auto,w_1920/v1/pm2/mall_common/0001/21/d8577a5f5a2c1ea6cbeae991214bd2c8d2d5f2b6.jpeg') no-repeat center center fixed;
+           background-size: cover;
+           min-height: 100vh;
+           margin: 0;
+           display: flex;
+           flex-direction: column;
+           justify-content: center;
+           align-items: center;
+           color: #fff;
+           overflow: hidden; /* Evita el desplazamiento */
+       }
+
+       /* Título */
+       h2 {
+           text-align: center;
+           color: #ffcc00;
+           font-size: 2.8em;
+           margin-top: 100px;
+           text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6);
+       }
+
+       /* Formulario ajustado a los campos */
+       .form-container {
+           background-color: rgba(255, 255, 255, 0.7); /* Fondo más claro para un mejor contraste */
+           padding: 30px;
+           border-radius: 15px;
+           width: 350px;
+           box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+           color: #333;
+           border: 3px solid rgba(255, 255, 255, 0.7);
+           display: flex;
+           flex-direction: column;
+           justify-content: space-between;
+       }
+
+       label {
+           font-size: 1.2em;
+           color: #555;
+           margin-top: 15px;
+       }
+
+       input {
+           width: 100%;
+           padding: 12px;
+           margin-top: 8px;
+           border: 1px solid #ddd;
+           border-radius: 5px;
+           font-size: 1em;
+           color: #555;
+           background-color: rgba(255, 255, 255, 0.9);
+           box-sizing: border-box;
+       }
+
+       input:focus {
+           border-color: #ff6347;
+           outline: none;
+       }
+
+       button {
+           width: 100%;
+           padding: 12px;
+           background-color: #ffcc00;
+           color: #333;
+           border: none;
+           border-radius: 5px;
+           font-size: 1.1em;
+           cursor: pointer;
+           margin-top: 20px;
+           transition: background-color 0.3s, transform 0.2s ease-in-out;
+       }
+
+       button:hover {
+           background-color: #e6b800;
+           transform: scale(1.05);
+           box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+       }
+
+       p {
+           text-align: center;
+           color: rgb(128, 128, 0);
+           margin-top: 20px;
+       }
+
+       /* Mensaje de error */
+       .error-message {
+           color: red;
+           font-size: 1.2em;
+           text-align: center;
+           margin-top: 10px;
+       }
+
+       /* Responsive */
+       @media (max-width: 500px) {
+           h2 {
+               font-size: 2.2em;
+           }
+
+           .form-container {
+               width: 90%;
+               padding: 20px;
+           }
+       }
+   </style>
+</head>
+<body>
+
+   <h2>Iniciar Sesión Cliente</h2>
+
+   <div class="form-container"> 
+       <form action="/cliente-login" method="post">
+           <label for="usuario">Usuario</label>
+           <input type="text" id="usuario" name="usuario" placeholder="Ingresa tu usuario" required>
+           <label for="contraseña">Contraseña</label>
+           <input type="password" id="contraseña" name="contraseña" placeholder="Ingresa tu contraseña" required>
+           <button type="submit">Iniciar Sesión</button>
+       </form>
+
+       <!-- Mensaje de error si las credenciales son incorrectas -->
+       <div th:if="${error}" class="error-message">
+           <p th:text="${error}"></p>
+       </div>
+   </div>
+
+   <p>¿No tienes una cuenta? <a href="/clientes/nuevo" style="color: rgb(0, 0, 0);">Regístrate aquí</a></p>
+
+</body>
+</html>

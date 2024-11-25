@@ -1,0 +1,214 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+   <title>Lista de Tiendas</title>
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+   <style>
+       body {
+           font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+           background: url('			https://elcambiador.com/assets/img/places/1/5/7/1/1571/1571-005.jpg') no-repeat center center fixed;
+           background-size: cover;
+           color: #fff;
+           margin: 0;
+           display: flex;
+           flex-direction: column;
+           align-items: center; 
+           padding: 20px;
+           position: relative;
+           min-height: 100vh;
+           overflow: hidden;
+       }
+
+       body::before {
+           content: '';
+           position: absolute;
+           inset: 0;
+           border: 8px solid transparent;
+           border-image: linear-gradient(45deg, #00bfff, #ff1493, #ff6347, #ffd700);
+           border-image-slice: 1;
+           pointer-events: none;
+       }
+
+       h2 {
+           font-size: 2.5em;
+           margin: 20px 0;
+           text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.6);
+           text-align: center;
+           animation: fadeIn 1s ease-in-out;
+       }
+
+       @keyframes fadeIn {
+           from {
+               opacity: 0;
+               transform: translateY(-20px);
+           }
+           to {
+               opacity: 1;
+               transform: translateY(0);
+           }
+       }
+
+       .container {
+           background: rgba(255, 255, 255, 0.1);
+           border: 2px solid rgba(255, 255, 255, 0.3);
+           backdrop-filter: blur(10px);
+           padding: 30px;
+           border-radius: 20px;
+           box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+           width: 90%;
+           max-width: 900px;
+           animation: scaleUp 0.7s ease-in-out;
+       }
+
+       @keyframes scaleUp {
+           from {
+               transform: scale(0.9);
+               opacity: 0.5;
+           }
+           to {
+               transform: scale(1);
+               opacity: 1;
+           }
+       }
+
+       button {
+           padding: 12px 20px;
+           background-color: #ff7e5f;
+           color: #fff;
+           border: none;
+           border-radius: 5px;
+           font-size: 1.1em;
+           cursor: pointer;
+           transition: transform 0.3s, box-shadow 0.3s;
+           margin-bottom: 10px;
+       }
+
+       button:hover {
+           transform: translateY(-3px);
+           box-shadow: 0 5px 15px rgba(255, 126, 95, 0.7);
+       }
+
+       table {
+           width: 100%;
+           margin-top: 20px;
+           border-collapse: collapse;
+           color: #fff;
+       }
+
+       th, td {
+           padding: 12px;
+           text-align: center;
+       }
+
+       th {
+           background-color: rgba(0, 0, 0, 0.5);
+           text-transform: uppercase;
+           letter-spacing: 1px;
+       }
+
+       td {
+           background-color: rgba(255, 255, 255, 0.1);
+       }
+
+       a {
+           color: #ffd700;
+           text-decoration: none;
+       }
+
+       a:hover {
+           text-decoration: underline;
+       }
+
+       .back-link {
+           text-align: center;
+           margin-top: 30px;
+       }
+
+       .actions {
+           display: flex;
+           justify-content: center;
+           gap: 10px;
+       }
+
+       .edit-btn, .delete-btn {
+           padding: 8px 15px;
+           border-radius: 5px;
+           text-align: center;
+           transition: transform 0.3s, box-shadow 0.3s;
+           font-size: 1.1em;
+       }
+
+       .edit-btn {
+           background-color: rgb(0, 128, 255);
+           color: white;
+       }
+
+       .edit-btn:hover {
+           background-color: #45a049;
+           transform: translateY(-2px);
+       }
+
+       .delete-btn {
+           background-color: #f44336;
+           color: white;
+       }
+
+       .delete-btn:hover {
+           background-color: #e53935;
+           transform: translateY(-2px);
+       }
+
+       @media (max-width: 600px) {
+           .container {
+               padding: 15px;
+           }
+
+           h2 {
+               font-size: 2em;
+           }
+
+           button {
+               font-size: 0.9em;
+               padding: 10px;
+           }
+
+           th, td {
+               font-size: 0.9em;
+           }
+       }
+   </style>
+</head>
+<body>
+   <h2>Tiendas</h2>
+   <div class="container">
+       <a href="/admin/tiendas/nuevo"><button>Nueva Tienda</button></a>
+       <table>
+           <tr>
+               <th>Nombre</th>
+               <th>Número Local</th>
+               <th>Seguridad</th>
+               <th>Hora de Apertura</th>
+               <th>Hora de Cerrado</th>
+               <th>Ubicacion en el Centro Comercial</th>
+               <th>Acciones</th>
+           </tr>
+           <tr th:each="tienda : ${tiendas}">
+               <td th:text="${tienda.nombre}"></td>
+               <td th:text="${tienda.numeroLocal}"></td>
+               <td th:text="${tienda.seguridad}"></td>
+               <td th:text="${tienda.horaApertura}"></td>
+               <td th:text="${tienda.horaCerrado}"></td>
+               <td th:text="${tienda.ubicacionZona}"></td>
+               <td class="actions">
+                   <a th:href="@{/admin/tiendas/editar/{id}(id=${tienda.id})}" class="edit-btn">Editar</a>
+                   <a th:href="@{/admin/tiendas/eliminar/{id}(id=${tienda.id})}" class="delete-btn" th:onclick="return confirm('¿Seguro que deseas eliminar esta tienda?');">Eliminar</a>
+               </td>
+           </tr>
+       </table>
+   </div>
+   <div class="back-link">
+       <a href="/admin-dashboard"><button>Volver</button></a>
+   </div>
+</body>
+</html>

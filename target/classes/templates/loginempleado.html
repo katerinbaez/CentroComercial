@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+   <title>Login Empleado</title>
+   <style>
+       /* Fondo general con imagen y bordes */
+       body {
+           font-family: 'Arial', sans-serif;
+           background-image: url('			https://www.turismodeobservacion.com/media/fotografias/escaleras-mecanicas-de-un-centro-comercial-de-madrid-68613-xl.jpg');
+           background-size: cover; /* Asegura que la imagen cubra toda la pantalla */
+           background-position: center center; /* Centra la imagen */
+           color: #333; /* Color de texto principal */
+           display: flex;
+           justify-content: center;
+           align-items: center;
+           height: 100vh;
+           margin: 0;
+           overflow: hidden;
+           border: 15px solid transparent; /* Borde transparente para aplicar gradiente */
+           border-image: linear-gradient(45deg, #ff6347, #3498db, #f39c12, #9b59b6);
+           border-image-slice: 1; /* Aplica el gradiente como borde */
+       }
+
+       /* Estilo del recuadro del formulario */
+       .login-container {
+           background-color: rgba(255, 255, 255, 0.85); /* Fondo blanco semi-transparente */
+           padding: 40px;
+           border-radius: 15px; /* Bordes redondeados */
+           box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+           width: 100%;
+           max-width: 400px; /* Ancho máximo */
+           text-align: center;
+           border: 4px solid rgb(128, 128, 0); /* Borde azul claro alrededor del cuadro */
+           transition: all 0.3s ease; /* Transición para efectos */
+       }
+
+       .login-container:hover {
+           box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Aumenta la sombra al hacer hover */
+           transform: scale(1.05); /* Efecto de zoom suave */
+       }
+
+       h2 {
+           font-size: 2em;
+           margin-bottom: 20px;
+           color: #333;
+       }
+
+       /* Estilo de los campos del formulario */
+       .input-field {
+           margin-bottom: 20px; /* Espacio entre los campos */
+           text-align: left;
+       }
+
+       label {
+           display: block;
+           font-size: 1em;
+           margin-bottom: 5px;
+           color: #555; /* Color de las etiquetas */
+       }
+
+       input[type="text"],
+       input[type="password"] {
+           width: 100%;
+           padding: 12px;
+           border: 1px solid #ddd;
+           border-radius: 10px;
+           background-color: #f9f9f9; /* Fondo suave para los campos */
+           font-size: 1.1em;
+           color: #555;
+           transition: all 0.3s ease; /* Transición suave */
+       }
+
+       input[type="text"]:focus,
+       input[type="password"]:focus {
+           border-color: #3498db; /* Borde azul cuando el campo está enfocado */
+           background-color: #fff; /* Fondo blanco cuando está enfocado */
+           outline: none;
+       }
+
+       /* Botón de envío */
+       button {
+           width: 100%;
+           padding: 14px;
+           background-color: rgb(128, 128, 0); /* Azul claro */
+           color: #fff;
+           border: none;
+           border-radius: 10px;
+           font-size: 1.2em;
+           cursor: pointer;
+           transition: all 0.3s ease; /* Transición para efectos */
+       }
+
+       button:hover {
+           background-color: #2980b9; /* Azul más oscuro en hover */
+       }
+
+       /* Enlace de volver */
+       .back-button {
+           display: inline-block;
+           margin-top: 15px;
+           color: rgb(64, 0, 128);
+           text-decoration: none;
+           font-size: 1em;
+       }
+
+       .back-button:hover {
+           text-decoration: underline;
+       }
+
+       /* Mensajes de error */
+       .error-message {
+           color: red;
+           font-size: 1.1em;
+           margin-top: 15px;
+       }
+   </style>
+</head>
+<body>
+
+   <div class="login-container">
+       <h2>Login de Empleado</h2>
+       <form action="/empleado-login" method="post">
+           <div class="input-field">
+               <label for="usuario">Usuario:</label>
+               <input type="text" id="usuario" name="usuario" required>
+           </div>
+
+           <div class="input-field">
+               <label for="contraseña">Contraseña:</label>
+               <input type="password" id="contraseña" name="contraseña" required>
+           </div>
+
+           <button type="submit">Iniciar Sesión</button>
+       </form>
+
+       <a class="back-button" href="/">Volver</a>
+
+       <div th:if="${error}">
+           <p class="error-message">[[${error}]]</p>
+       </div>
+   </div>
+
+</body>
+</html>

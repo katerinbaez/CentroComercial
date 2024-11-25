@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Reserva Confirmada</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: url('			https://cdn.prod.website-files.com/627cdcca8bc0d22df9b2672f/65bc58ec14e25f0f62b9bc47_GI3G7LbcwhTQpi6bYZqWERcC70fhektx7YBvl6mnwh4.webp') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 8px solid transparent;
+            border-image: linear-gradient(45deg, #00bfff, #ff1493, #ff6347, #ffd700);
+            border-image-slice: 1;
+            pointer-events: none;
+        }
+
+        .container {
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.6);
+        }
+
+        p {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+
+        p span {
+            font-weight: bold;
+            color: #32cd32;
+        }
+
+        .btn-container {
+            margin-top: 20px;
+        }
+
+        .btn-container a {
+            text-decoration: none;
+        }
+
+        .btn-container button {
+            padding: 12px 20px;
+            background-color: #32cd32;
+            color: #fff;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn-container button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(50, 205, 50, 0.7);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Reserva Confirmada</h1>
+        <p>Has reservado el estacionamiento número <span th:text="${estacionamiento.numero}">Número</span>.</p>
+        <p>Estado: <span th:text="${estacionamiento.estado}">Estado</span></p>
+        <p>Tu número de celular registrado es: <span th:text="${telefono}">Número de Celular</span>.</p>
+        <div class="btn-container">
+            <a th:href="@{/estacionamientos}">
+                <button>Volver a la Lista</button>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Estacionamientos</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: url('			https://blog.tps.com.mx/hubfs/Blog%20Marzo%202019/7-TPS-Marzo-Imagenes-Blog-Medidas-de-precaucion-para-el-estacionamiento-solo.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 8px solid transparent;
+            border-image: linear-gradient(45deg, #00bfff, #ff1493, #ff6347, #ffd700);
+            border-image-slice: 1;
+            pointer-events: none;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin: 20px 0;
+            text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.6);
+            text-align: center;
+        }
+
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: rgb(0, 64, 64);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        th {
+            background: rgba(255, 255, 255, 0.2);
+            font-weight: bold;
+            color: #ffd700;
+        }
+
+        td {
+            background: rgba(0, 0, 0, 0.1);
+            color: #fff;
+        }
+
+        .available {
+            color: #32cd32; /* Verde */
+            font-weight: bold;
+        }
+
+        .reserved {
+            color: #ff4500; /* Naranja */
+            font-weight: bold;
+        }
+
+        a {
+            padding: 8px 16px;
+            background-color: #ff7e5f;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 126, 95, 0.7);
+        }
+
+        .back-link {
+            margin-top: 20px;
+        }
+
+        .back-link a {
+            padding: 12px 20px;
+            background-color: #00bfff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            text-decoration: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .back-link a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 191, 255, 0.7);
+        }
+    </style>
+</head>
+<body>
+    <h1>Lista de Estacionamientos</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Número</th>
+                <th>Estado</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="estacionamiento : ${estacionamientos}">
+                <td th:text="${estacionamiento.numero}">Número</td>
+                <td>
+                    <span th:if="${estacionamiento.estado == 'Disponible'}" class="available">Disponible</span>
+                    <span th:if="${estacionamiento.estado != 'Disponible'}" class="reserved">Reservado</span>
+                </td>
+                <td>
+                    <a th:if="${estacionamiento.estado == 'Disponible'}" 
+                       th:href="@{/estacionamientos/apartar/{id}(id=${estacionamiento.id})}">Apartar</a>
+                    <span th:if="${estacionamiento.estado != 'Disponible'}">No Disponible</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="back-link">
+        <a href="/cliente-dashboard">Volver</a>
+    </div>
+</body>
+</html>

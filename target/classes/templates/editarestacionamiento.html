@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Editar Estacionamiento</title>
+</head>
+<body>
+    <h2>Editar Estacionamiento</h2>
+    <form th:action="@{'/estacionamientos/editar/' + ${estacionamiento.id}}" method="post">
+        <label for="numero">Número:</label>
+        <input type="text" id="numero" name="numero" th:value="${estacionamiento.numero}" /><br />
+        <label for="estado">Estado:</label>
+        <select id="estado" name="estado">
+            <option th:selected="${estacionamiento.estado == 'Disponible'}" value="Disponible">Disponible</option>
+            <option th:selected="${estacionamiento.estado == 'Reservado'}" value="Reservado">Reservado</option>
+        </select><br />
+        <button type="submit">Guardar</button>
+    </form>
+    <a href="/estacionamientos">Cancelar</a>
+</body>
+</html>

@@ -1,0 +1,207 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Editar Tienda</title>
+   <style>
+       body {
+           font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+           background: url('			https://concepto.de/wp-content/uploads/2022/12/centro-comercial-dubai.jpg') no-repeat center center fixed;
+           background-size: cover;
+           color: #fff;
+           margin: 0; 
+           display: flex;
+           flex-direction: column;
+           align-items: center;
+           padding: 20px;
+           position: relative;
+           min-height: 100vh;
+           overflow: auto; /* Cambiar a auto para permitir desplazamiento */
+       }
+
+       body::before {
+           content: '';
+           position: absolute;
+           inset: 0;
+           border: 8px solid transparent;
+           border-image: linear-gradient(45deg, #00bfff, #ff1493, #ff6347, #ffd700);
+           border-image-slice: 1;
+           pointer-events: none;
+       }
+
+       h2 {
+           font-size: 2.5em;
+           margin-top: 50px;
+           color: #fff;
+           text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.6);
+           text-align: center;
+           animation: fadeIn 1s ease-in-out;
+       }
+
+       @keyframes fadeIn {
+           from {
+               opacity: 0;
+               transform: translateY(-20px);
+           }
+           to {
+               opacity: 1;
+               transform: translateY(0);
+           }
+       }
+
+       .form-container {
+           width: 60%;
+           margin: 30px auto;
+           background-color: rgb(0, 0, 0);
+           padding: 30px;
+           border-radius: 8px;
+           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+           backdrop-filter: blur(10px);
+           animation: scaleUp 0.7s ease-in-out;
+       }
+
+       @keyframes scaleUp {
+           from {
+               transform: scale(0.9);
+               opacity: 0.5;
+           }
+           to {
+               transform: scale(1);
+               opacity: 1;
+           }
+       }
+
+       label {
+           font-size: 1.1em;
+           margin-bottom: 8px;
+           display: block;
+           color: #fff;
+       }
+
+       input[type="text"],
+       input[type="number"],
+       select,
+       input[type="time"] {
+           width: 100%;
+           padding: 10px;
+           margin-bottom: 20px;
+           border-radius: 5px;
+           border: 1px solid #ccc;
+           font-size: 1em;
+           background-color: transparent;
+           color: #fff;
+       }
+
+       input[type="text"]:focus,
+       input[type="number"]:focus,
+       select:focus,
+       input[type="time"]:focus {
+           outline: none;
+           border-color: #00bfff;
+       }
+
+       button {
+           padding: 12px 20px;
+           background-color: #ff7e5f;
+           color: #fff;
+           border: none;
+           border-radius: 5px;
+           font-size: 1.1em;
+           cursor: pointer;
+           transition: background-color 0.3s;
+           width: 100%;
+       }
+
+       button:hover {
+           background-color: #004d99;
+       }
+
+       .back-link {
+           position: absolute;
+           top: 20px;
+           right: 20px;
+       }
+
+       .back-link a {
+           color: #00bfff;
+           text-decoration: none;
+       }
+
+       .back-link a:hover {
+           text-decoration: underline;
+       }
+
+       @media (max-width: 600px) {
+           .form-container {
+               width: 90%;
+               padding: 10px;
+           }
+
+           h2 {
+               font-size: 2em;
+           }
+
+           button {
+               font-size: 1em;
+               padding: 10px;
+           }
+       }
+   </style>
+</head>
+<body>
+   <h2>Editar Tienda</h2>
+
+   <!-- Formulario para editar una tienda -->
+   <div class="form-container">
+       <form th:action="@{/admin/tiendas/guardar}" method="post" th:object="${tienda}">
+           <!-- Campo ID para asegurarse de que se actualiza la tienda correcta -->
+           <input type="hidden" th:field="*{id}" />
+
+           <label for="nombre">Nombre:</label>
+           <input type="text" id="nombre" th:field="*{nombre}" required>
+           <br>
+
+           <label for="numeroLocal">Número Local:</label>
+           <input type="number" id="numeroLocal" th:field="*{numeroLocal}" required>
+           <br>
+
+           <label for="seguridad">Seguridad:</label>
+           <select id="seguridad" th:field="*{seguridad}">
+               <option value="" th:text="'Seleccione una seguridad'">Seleccione una seguridad</option>
+               <option th:each="seguridad : ${seguridades}" 
+                       th:value="${seguridad.nombre}" 
+                       th:text="${seguridad.nombre}"></option>
+           </select>
+           <br>
+
+           <label for="horaApertura">Hora de Apertura:</label>
+           <input type="time" id="horaApertura" th:field="*{horaApertura}" required>
+           <br>
+
+           <label for="horaCerrado">Hora de Cierre:</label>
+           <input type="time" id="horaCerrado" th:field="*{horaCerrado}" required>
+           <br>
+
+           <label for="ubicacionZona">Zona en la que se ubica:</label>
+           <select id="ubicacionZona" th:field="*{ubicacionZona}" required>
+               <option value="" disabled selected>Seleccione una zona</option>
+               <option value="Primer piso Sur">Primer piso Sur</option>
+               <option value="Primer piso Norte">Primer piso Norte</option>
+               <option value="Primer piso Centro">Primer piso Centro</option>
+               <option value="Segundo piso Sur">Segundo piso Sur</option>
+               <option value="Segundo piso Norte">Segundo piso Norte</option>
+               <option value="Segundo piso Centro">Segundo piso Centro</option>
+           </select>
+           <br>
+
+           <button type="submit">Actualizar Tienda</button>
+       </form>
+   </div>
+
+   <div class="back-link">
+       <a href="/admin/tiendas"><button>Volver</button></a>
+   </div>
+</body>
+</html>

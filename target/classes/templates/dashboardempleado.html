@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Dashboard Empleado</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Fondo general */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: url('			https://watermark.lovepik.com/photo/20211118/large/lovepik-decoration-drawing-of-store-entity-picture_500134568.jpg') no-repeat center center fixed;
+            background-size: cover; /* Asegura que ocupe todo el fondo */
+            color: #fff;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Estilo decorativo del borde */
+        body::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 8px solid transparent;
+            border-image: linear-gradient(45deg, #00bfff, #ff1493, #ff6347, #ffd700);
+            border-image-slice: 1;
+            pointer-events: none;
+        }
+
+        /* Título principal */
+        h2 {
+            font-size: 3em;
+            margin: 20px 0;
+            text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.6);
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        /* Animación de entrada */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Contenedor del panel */
+        .dashboard-container {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 700px;
+            text-align: center;
+            animation: scaleUp 0.7s ease-in-out;
+        }
+
+        /* Animación de entrada del contenedor */
+        @keyframes scaleUp {
+            from {
+                transform: scale(0.9);
+                opacity: 0.5;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Tarjetas del panel */
+        .dashboard-card {
+            background: linear-gradient(135deg, rgb(0, 128, 128), rgb(0, 128, 64)); /* Gradiente cálido */
+            border-radius: 15px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: #fff;
+            font-size: 1.2em;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 25px rgb(255, 255, 0);
+        }
+
+        .dashboard-card i {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        /* Botón de volver */
+        .back-button {
+            margin-top: 20px;
+            padding: 12px 25px;
+            font-size: 1.1em;
+            color: rgb(255, 255, 255);
+            background: rgb(64, 0, 128);
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            text-align: center;
+            display: inline-block;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: rgb(0, 0, 255);
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgb(0, 255, 255);
+            color: #fff;
+        }
+
+        /* Responsivo */
+        @media (max-width: 600px) {
+            .dashboard-container {
+                padding: 15px;
+                grid-template-columns: 1fr;
+            }
+
+            .dashboard-card {
+                font-size: 1em;
+                padding: 15px;
+            }
+
+            h2 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h2>Dashboard Empleado</h2>
+    <div class="dashboard-container">
+        <a href="/productos/nuevo" class="dashboard-card">
+            <i class="fas fa-plus-circle"></i>
+            Agregar Nuevo Producto
+        </a>
+        <a href="/productos/ver" class="dashboard-card">
+            <i class="fas fa-eye"></i>
+            Ver Productos
+        </a>
+    </div>
+    <a class="back-button" href="/empleado-login">Volver</a>
+</body>
+</html>
