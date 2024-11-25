@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Seleccionar Tipo de Usuario</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: url('https://ekosnegocios.com/image/posts/June2023/VuH0kIV9x04wi3tiU1NF.jpg') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #fff;
+            position: relative;
+        }
+
+        /* Contenedor principal */
+        .content-container {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 40px 60px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            width: 100%;
+            max-width: 650px;
+            position: relative;
+        }
+
+        h2 {
+            font-size: 2.8em;
+            color: #fff;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+        }
+
+        /* Lista de enlaces */
+        ul {
+            list-style: none;
+            padding: 0;
+            text-align: center;
+        }
+
+        li {
+            margin-bottom: 25px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #fff;
+            background-color: #ff6347; /* Mantener color vibrante */
+            padding: 15px 35px;
+            font-size: 1.2em;
+            border-radius: 50px;
+            display: inline-block;
+            transition: all 0.4s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 280px;
+            margin: 0 auto;
+        }
+
+        a:hover {
+            background-color: #4682b4; /* Color de hover más frío */
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Avatar y burbuja de texto */
+        .avatar-container {
+            position: absolute;
+            top: 80px;
+            left: 50px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            animation: avatarAnimation 3s ease-in-out infinite;
+        }
+
+        @keyframes avatarAnimation {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        .avatar-container img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 3px solid #ff6347;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .speech-bubble {
+            background: #ff1493;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 25px;
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.1em;
+            text-align: center;
+            width: 200px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .speech-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 10px;
+            border-style: solid;
+            border-color: #ff1493 transparent transparent transparent;
+        }
+
+        /* Efecto de bordes animados */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            border: 6px solid;
+            border-image: linear-gradient(45deg, #00bfff, #ff1493, #ff6347, #ffd700);
+            border-image-slice: 1;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="content-container">
+        <h2>¿Qué tipo de usuario eres?</h2>
+        <ul>
+            <li><a href="/admin-login">Administrador</a></li>
+            <li><a href="/empleado-login">Empleado</a></li>
+            <li><a href="/cliente-login">Cliente</a></li>
+        </ul>
+    </div>
+
+    <!-- Avatar con burbuja de texto -->
+    <div class="avatar-container">
+        <img src="https://img.icons8.com/clouds/100/null/user.png" alt="Avatar">
+        <div class="speech-bubble">¡Selecciona tu usuario!</div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>Home Cliente</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Fondo general */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+			           background: url('			https://www.semana.com/resizer/v2/IQRL36N52ZEXTIOEEOWBPLDA64.jpg?auth=5ab25123f98d413e091e4a423c3ccaa76af54d01f8a6ced1c3fed7116e269ded&smart=true&quality=75&width=1280&height=720') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Estilo decorativo del borde */
+        body::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 8px solid transparent;
+            border-image: linear-gradient(45deg, #00bfff, #ff1493, #ff6347, #ffd700);
+            border-image-slice: 1;
+            pointer-events: none;
+        }
+
+        /* Título principal */
+        h2 {
+            font-size: 3em;
+            margin: 20px 0;
+            text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.6);
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h2 i {
+            margin-right: 15px;
+            font-size: 1.5em; /* Ajuste del tamaño del ícono */
+        }
+
+        /* Animación de entrada */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Contenedor centralizado */
+        .button-container {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            text-align: center;
+            animation: scaleUp 0.7s ease-in-out;
+            max-width: 400px; /* Limitar el ancho para que se vea mejor centrado */
+            width: 100%;
+        }
+
+        /* Animación de entrada del contenedor */
+        @keyframes scaleUp {
+            from {
+                transform: scale(0.9);
+                opacity: 0.5;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Botones */
+        .button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 25px;
+            background-color: #00bfff;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .button:hover {
+            background-color: #0099cc;
+            transform: translateY(-2px);
+        }
+
+        .button:active {
+            transform: translateY(1px);
+        }
+
+        .button i {
+            margin-right: 10px;
+        }
+
+        /* Botón de Volver */
+        .back-button {
+            margin-top: 20px;
+            padding: 12px 25px;
+            font-size: 1.1em;
+            color: #333;
+            background: #ffd700;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none; /* EVITAR el subrayado */
+            text-align: center;
+            display: inline-block;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: #ffa500;
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(255, 165, 0, 0.7);
+            color: #fff;
+        }
+
+        /* Enlaces */
+        a {
+            text-decoration: none; /* EVITAR el subrayado */
+        }
+
+        /* Responsivo */
+        @media (max-width: 600px) {
+            .button-container {
+                padding: 15px;
+            }
+
+            .button {
+                font-size: 1em;
+                padding: 12px 20px;
+            }
+
+            h2 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h2><i class="fas fa-user"></i> Bienvenido Cliente</h2>
+    <div class="button-container">
+        <a href="/clientes/tiendasCliente">
+            <button class="button">
+                <i class="fas fa-store"></i> Tiendas
+            </button>
+        </a>
+
+        <a href="/estacionamientos">
+            <button class="button">
+                <i class="fas fa-store"></i> Estacionamiento
+            </button>
+        </a>
+   
+    </div>
+    <a class="back-button" href="/">Volver</a>
+
+</body>
+
+</html>

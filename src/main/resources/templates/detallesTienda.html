@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle de Tienda</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: url('			https://hotelesb3.com/wp-content/uploads/2023/05/Mejores-centros-comerciales-Bogota.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 8px solid transparent;
+            border-image: linear-gradient(45deg, #00bfff, #ff1493, #ff6347, #ffd700);
+            border-image-slice: 1;
+            pointer-events: none;
+        }
+
+        h1, h2 {
+            font-size: 2.5em;
+            margin: 20px 0;
+            text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.6);
+            text-align: center;
+        }
+
+        .detail-container, .products-container {
+            background: rgb(64, 128, 128);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            padding: 20px;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+        }
+
+        th {
+            background: rgba(255, 255, 255, 0.2);
+            font-weight: bold;
+        }
+
+        td {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .back-link {
+            margin-top: 20px;
+        }
+
+        .back-link a {
+            display: inline-block;
+            padding: 12px 20px;
+            background-color: #ff7e5f;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .back-link a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 126, 95, 0.7);
+        }
+    </style>
+</head>
+<body>
+    <h1>Detalle de Tienda</h1>
+    <div class="detail-container">
+        <h2 th:text="${tienda.nombre}">Nombre de la tienda</h2>
+        <p><strong>Zona:</strong> <span th:text="${tienda.ubicacionZona}">Zona</span></p>
+        <p><strong>Local:</strong> <span th:text="${tienda.numeroLocal}">Número de local</span></p>
+        <p><strong>Horario:</strong> 
+            <span th:text="${tienda.horaApertura}">Hora Apertura</span> - 
+            <span th:text="${tienda.horaCerrado}">Hora Cierre</span>
+        </p>
+    </div>    
+
+    <div class="products-container">
+        <h2>Productos Disponibles</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Precio</th>
+                    <th>Tienda</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Iterar sobre todos los productos -->
+                <tr th:each="producto : ${productos}" 
+                    th:if="${producto.tienda == tienda.nombre}">
+                    <td th:text="${producto.nombre}">Nombre Producto</td>
+                    <td th:text="${producto.descripcion}">Descripción</td>
+                    <td th:text="${producto.precio}">Precio</td>
+                    <td th:text="${producto.tienda}">Nombre Tienda</td> 
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="back-link">
+        <a href="/clientes/tiendasCliente">Volver</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,215 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head> 
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Editar Empleado</title>
+   <style>
+       body {
+           font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+           background: url('			https://png.pngtree.com/background/20211216/original/pngtree-real-shots-of-shopping-malls-shopping-malls-people-flow-leisure-shopping-picture-image_1526058.jpg') no-repeat center center fixed;
+           background-size: cover;
+           color: #fff;
+           margin: 0;
+           display: flex;
+           flex-direction: column;
+           align-items: center;
+           padding: 20px;
+           position: relative;
+           min-height: 100vh;
+       }
+
+       body::before {
+           content: '';
+           position: absolute;
+           inset: 0;
+           border: 8px solid transparent;
+           border-image: linear-gradient(45deg, #00bfff, #ff1493, #ff6347, #ffd700);
+           border-image-slice: 1;
+           pointer-events: none;
+       }
+
+       h1 {
+           font-size: 2.5em;
+           margin-top: 50px;
+           color: #fff;
+           text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.6);
+           text-align: center;
+           animation: fadeIn 1s ease-in-out;
+       }
+
+       @keyframes fadeIn {
+           from {
+               opacity: 0;
+               transform: translateY(-20px);
+           }
+           to {
+               opacity: 1;
+               transform: translateY(0);
+           }
+       }
+
+       .form-container {
+           width: 60%;
+           margin: 30px auto;
+           background-color: rgb(0, 0, 0);
+           padding: 30px;
+           border-radius: 8px;
+           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+           backdrop-filter: blur(10px);
+           animation: scaleUp 0.7s ease-in-out;
+           max-width: 100%;
+       }
+
+       @keyframes scaleUp {
+           from {
+               transform: scale(0.9);
+               opacity: 0.5;
+           }
+           to {
+               transform: scale(1);
+               opacity: 1;
+           }
+       }
+
+       label {
+           font-size: 1.1em;
+           margin-bottom: 8px;
+           display: block;
+           color: #fff;
+       }
+
+       input[type="text"],
+       input[type="password"],
+       input[type="time"],
+       select {
+           width: 100%;
+           padding: 10px;
+           margin-bottom: 20px;
+           border-radius: 5px;
+           border: 1px solid #ccc;
+           font-size: 1em;
+           background-color: transparent;
+           color: #fff;
+       }
+
+       input[type="text"]:focus,
+       input[type="password"]:focus,
+       input[type="time"]:focus,
+       select:focus {
+           outline: none;
+           border-color: #00bfff;
+       }
+
+       button {
+           padding: 12px 20px;
+           background-color: #ff7e5f;
+           color: #fff;
+           border: none;
+           border-radius: 5px;
+           font-size: 1.1em;
+           cursor: pointer;
+           transition: background-color 0.3s;
+           width: 100%;
+           margin-bottom: 20px;
+       }
+
+       button:hover {
+           background-color: #004d99;
+       }
+
+       .back-link {
+           position: absolute;
+           top: 20px;
+           right: 20px;
+       }
+
+       .back-link button {
+           background-color: rgb(255, 128, 64);
+           font-size: 1.1em;
+           padding: 10px 15px;
+       }
+
+       .back-link button:hover {
+           background-color: #0099cc;
+       }
+
+       .back-link a {
+           color: #00bfff;
+           text-decoration: none;
+       }
+
+       .back-link a:hover {
+           text-decoration: underline;
+       }
+
+       @media (max-width: 600px) {
+           .form-container {
+               width: 90%;
+               padding: 10px;
+           }
+
+           h1 {
+               font-size: 2em;
+           }
+
+           button {
+               font-size: 1em;
+               padding: 10px;
+           }
+       }
+   </style>
+</head>
+<body>
+   <h1>Editar Empleado</h1>
+   <div class="form-container">
+       <form th:action="@{/admin/empleados/guardar}" method="post" th:object="${empleado}">
+           <!-- Aquí enviamos el ID del empleado, esto es crucial para la actualización -->
+           <input type="hidden" th:field="*{id}" />
+
+           <label for="cedula">Cédula:</label>
+           <input type="text" id="cedula" th:field="*{cedula}" required>
+           
+           <label for="nombre">Nombre:</label>
+           <input type="text" id="nombre" th:field="*{nombre}" required>
+           
+           <label for="apellido">Apellido:</label>
+           <input type="text" id="apellido" th:field="*{apellido}" required>
+           
+           <label for="usuario">Usuario:</label>
+           <input type="text" id="usuario" th:field="*{usuario}" required>
+           
+           <label for="contraseña">Contraseña:</label>
+           <input type="password" id="contraseña" th:field="*{contraseña}" required>
+           
+           <label for="cargo">Cargo:</label>
+           <select id="cargo" th:field="*{cargo}">
+               <option value="" th:text="'Seleccione un cargo'">Seleccione un Cargo</option>
+               <option value="Vendedor" th:text="'Vendedor'">Vendedor</option>
+               <option value="Gerente" th:text="'Gerente'">Gerente</option>
+               <option value="Cajero" th:text="'Cajero'">Cajero</option>
+           </select>
+           
+           <label for="tienda">Tienda:</label>
+           <select id="tienda" th:field="*{tienda}">
+               <option value="" th:text="'Seleccione una tienda'">Seleccione una Tienda</option>
+               <option th:each="tienda : ${tiendas}" 
+                       th:value="${tienda.nombre}" 
+                       th:text="${tienda.nombre}"></option>
+           </select>
+           
+           <label for="horaEntrada">Hora de Entrada:</label>
+           <input type="time" id="horaEntrada" th:field="*{horaEntrada}" required>
+           
+           <label for="horaSalida">Hora de Salida:</label>
+           <input type="time" id="horaSalida" th:field="*{horaSalida}" required>
+
+           <button type="submit">Actualizar Empleado</button>
+       </form>
+   </div>
+   <div class="back-link">
+       <a href="/admin/empleados"><button>Volver</button></a>
+   </div>
+</body>
+</html>

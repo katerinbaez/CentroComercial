@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Seguridad</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: url('			https://images.mnstatic.com/49/27/4927d37251fca6aa9d55f1c80609cd56.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex; 
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            min-height: 100vh;
+            overflow: auto; /* Permite el desplazamiento cuando el contenido sea mayor que la pantalla */
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 8px solid transparent;
+            border-image: linear-gradient(45deg, #00bfff, #ff1493, #ff6347, #ffd700);
+            border-image-slice: 1;
+            pointer-events: none;
+        }
+
+        h2 {
+            font-size: 2.5em;
+            margin-top: 50px;
+            color: #fff;
+            text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.6);
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-container {
+            width: 60%;
+            margin: 30px auto;
+            background-color: rgb(0, 0, 0); /* Fondo con opacidad */
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            animation: scaleUp 0.7s ease-in-out;
+            overflow-y: auto; /* Permite el desplazamiento interno del formulario */
+        }
+
+        @keyframes scaleUp {
+            from {
+                transform: scale(0.9);
+                opacity: 0.5;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        label {
+            font-size: 1.1em;
+            margin-bottom: 8px;
+            display: block;
+            color: #fff;
+        }
+
+        input[type="text"], input[type="time"], select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 1em;
+            background-color: transparent;
+            color: #fff;
+        }
+
+        input[type="text"]:focus, input[type="time"]:focus, select:focus {
+            outline: none;
+            border-color: #00bfff;
+        }
+
+        button {
+            padding: 12px 20px;
+            background-color: #ff7e5f;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #004d99;
+        }
+
+        .back-link {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .back-link a {
+            color: #00bfff;
+            text-decoration: none;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .form-container {
+                width: 90%;
+                padding: 10px;
+            }
+
+            h2 {
+                font-size: 2em;
+            }
+
+            button {
+                font-size: 1em;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h2>Editar Seguridad</h2>
+
+    <!-- Formulario para editar seguridad -->
+    <div class="form-container">
+        <form th:action="@{/admin/seguridad/guardar}" method="post" th:object="${seguridad}">
+            <!-- Campo oculto para el ID -->
+            <input type="hidden" th:field="*{id}" />
+
+            <label for="cedula">Cedula:</label>
+            <input type="text" id="cedula" th:field="*{cedula}" required>
+            <br>
+
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" th:field="*{nombre}" required>
+            <br>
+
+            <label for="apellido">Apellido:</label>
+            <input type="text" id="apellido" th:field="*{apellido}" required>
+            <br>
+
+            <label for="horaEntrada">Hora de Entrada:</label>
+            <input type="time" id="horaEntrada" th:field="*{horaEntrada}" required>
+            <br>
+
+            <label for="horaSalida">Hora de Salida:</label>
+            <input type="time" id="horaSalida" th:field="*{horaSalida}" required>
+            <br>
+
+            <label for="zona">Zona de patrullaje:</label>
+            <select id="zona" th:field="*{zona}" required>
+                <option value="" disabled selected>Seleccione una zona</option>
+                <option value="Primer piso Sur">Primer piso Sur</option>
+                <option value="Primer piso Norte">Primer piso Norte</option>
+                <option value="Primer piso Centro">Primer piso Centro</option>
+                <option value="Segundo piso Sur">Segundo piso Sur</option>
+                <option value="Segundo piso Norte">Segundo piso Norte</option>
+                <option value="Segundo piso Centro">Segundo piso Centro</option>
+            </select>
+            <br>
+
+            <label for="telefono">Telefono:</label>
+            <input type="text" id="telefono" th:field="*{telefono}" required>
+            <br>
+
+            <button type="submit">Actualizar Seguridad</button>
+        </form>
+    </div>
+        <div class="back-link">
+            <a href="/admin/seguridad"><button>Volver</button></a>
+        </div>
+    </div>
+</body>
+</html>
